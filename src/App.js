@@ -1,6 +1,7 @@
 import './App.css';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch, connect } from 'react-redux';
 import {fetchData, nextImage, prevImage, setArtId, reset} from './dataSlice'
+
 
 function App() {
   const dispatch = useDispatch();
@@ -10,7 +11,6 @@ function App() {
     return currentState.apiData ?
       <img src={currentState.apiData.primaryImage} alt="rendered pic"/> :
       <h3>No image</h3>
-    
   }
 
   return (
@@ -30,4 +30,6 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = (state, ownProps) => ({ objectId: state.data.objectId })
+
+export default connect(mapStateToProps)(App);
